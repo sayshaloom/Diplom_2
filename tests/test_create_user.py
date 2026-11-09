@@ -9,17 +9,11 @@ from helpers import generate_user_payload
 class TestCreateUser:
 
     @allure.title("Создание уникального пользователя")
-    def test_create_unique_user_success(self):
-        payload = generate_user_payload()
-        response = requests.post(urls.CREATE_USER_URL, json=payload)
-        
+    def test_create_unique_user_success(self, create_and_delete_user):
+        _, response, _ = create_and_delete_user
+
         assert response.status_code == 200
         assert response.json().get("success") is True
-        
-        # Удаляем созданного пользователя вручную, так как фикстура здесь не используется
-        access_token = response.json().get("accessToken")
-        if access_token:
-            requests.delete(urls.USER_DATA_URL, headers={"Authorization": access_token})
 
     @allure.title("Ошибка при создании уже зарегистрированного пользователя")
     def test_create_existing_user_forbidden(self, create_and_delete_user):

@@ -1,5 +1,6 @@
 import random
 import string
+import allure
 import requests
 import urls
 
@@ -15,6 +16,7 @@ def generate_user_payload():
         "name": f"Name_{random_part}"
     }
 
+@allure.step("Получить список ингредиентов")
 def get_ingredient_ids(count=2):
     response = requests.get(urls.INGREDIENTS_URL)
     ingredients = response.json()["data"]

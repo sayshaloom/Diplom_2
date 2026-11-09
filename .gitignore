@@ -1,5 +1,4 @@
-    __pycache__/
-    .pytest_cache/
-    allure_results/
-    *.pyc
-    venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+venv/
